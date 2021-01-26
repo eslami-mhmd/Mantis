@@ -25,6 +25,8 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     var resetButton: UIButton?
     var counterClockwiseRotationButton: UIButton?
     var clockwiseRotationButton: UIButton?
+    var flipHorizontalButton: UIButton?
+    var flipVerticalButton: UIButton?
     var cropButton: UIButton?
     
     var config: CropToolbarConfig!
@@ -68,6 +70,16 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     private func createClockwiseRotationButton() {
         clockwiseRotationButton = createOptionButton(withTitle: nil, andAction: #selector(clockwiseRotate))
         clockwiseRotationButton?.setImage(ToolBarButtonImageBuilder.rotateCWImage(), for: .normal)
+    }
+    
+    private func createFlipHorizontalButton() {
+        flipHorizontalButton = createOptionButton(withTitle: nil, andAction: #selector(flipHorizontal))
+        flipHorizontalButton?.setImage(ToolBarButtonImageBuilder.flipHorizontally(), for: .normal)
+    }
+    
+    private func createFlipVerticalButton() {
+        flipVerticalButton = createOptionButton(withTitle: nil, andAction: #selector(flipVertical))
+        flipVerticalButton?.setImage(ToolBarButtonImageBuilder.flipVertically(), for: .normal)
     }
     
     private func createResetButton(with image: UIImage? = nil) {
@@ -143,6 +155,16 @@ public class CropToolbar: UIView, CropToolbarProtocol {
             addButtonsToContainer(button: clockwiseRotationButton)
         }
         
+        if config.toolbarButtonOptions.contains(.flipHorizontal) {
+            createFlipHorizontalButton()
+            addButtonsToContainer(button: flipHorizontalButton)
+        }
+
+        if config.toolbarButtonOptions.contains(.flipVertical) {
+            createFlipVerticalButton()
+            addButtonsToContainer(button: flipVerticalButton)
+        }
+
         if config.toolbarButtonOptions.contains(.reset) {
             createResetButton(with: ToolBarButtonImageBuilder.resetImage())
             addButtonsToContainer(button: resetButton)
@@ -221,6 +243,14 @@ public class CropToolbar: UIView, CropToolbarProtocol {
         cropToolbarDelegate?.didSelectClockwiseRotate()
     }
     
+    @objc private func flipHorizontal(_ sender: Any) {
+        cropToolbarDelegate?.didSelectFlipHorizontal()
+    }
+
+    @objc private func flipVertical(_ sender: Any) {
+        cropToolbarDelegate?.didSelectFlipVertical()
+    }
+
     @objc private func crop(_ sender: Any) {
         cropToolbarDelegate?.didSelectCrop()
     }
