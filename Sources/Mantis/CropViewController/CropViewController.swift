@@ -488,6 +488,14 @@ extension CropViewController: CropToolbarDelegate {
         handleRotate(rotateAngle: CGFloat.pi / 2)
     }
     
+    public func didSelectFlipHorizontal() {
+        // TODO: flip horizontal
+    }
+    
+    public func didSelectFlipVertical() {
+        // TODO: flip vertical
+    }
+    
     public func didSelectReset() {
         handleReset()
     }

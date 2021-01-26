@@ -12,6 +12,8 @@ public protocol CropToolbarDelegate {
     func didSelectCrop();
     func didSelectCounterClockwiseRotate();
     func didSelectClockwiseRotate();
+    func didSelectFlipHorizontal();
+    func didSelectFlipVertical();
     func didSelectReset();
     func didSelectSetRatio();
     func didSelectRatio(ratio: Double);
